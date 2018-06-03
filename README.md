@@ -1,12 +1,14 @@
-## standard image upload button
+## S3 Image Upload Plugin for Ckeditor5
 
-### build integration
+This is a fork of https://github.com/pourquoi/ckeditor5-simple-upload, that substitutes standard upload support for direct to S3 uploads.
+
+### Build Integration
 
 https://docs.ckeditor.com/ckeditor5/latest/builds/guides/development/custom-builds.html
 
 `npm install ckeditor5-s3-upload`
 
-add this plugin and remove the ckfinder and easyimage plugins
+Add this plugin and remove the ckfinder and easyimage plugins
 
 ```javascript
 // build-config.js
@@ -48,7 +50,7 @@ module.exports = {
 };
 ```
 
-### configuration
+### Configuration
 
 ```javascript
 ClassicEditor.create(document.querySelector("#editor"), {
@@ -58,9 +60,9 @@ ClassicEditor.create(document.querySelector("#editor"), {
 });
 ```
 
-### backend
+### Backend
 
-the endpoint will receive a filename as a query parameter, and will need to respond with s3 credentials JSON in the following format.
+The endpoint will receive a filename as a query parameter, and will need to respond with s3 credentials JSON in the following format.
 
 ```json
 {
