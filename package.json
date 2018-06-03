@@ -15,7 +15,7 @@
     "src",
     "theme"
   ],
-  "author": "mjadobson",
+  "author": "mjadobson@gmail.com",
   "license": "MIT",
   "dependencies": {
     "@ckeditor/ckeditor5-core": "^10.0.0",
