@@ -6,7 +6,7 @@ This is a fork of https://github.com/pourquoi/ckeditor5-simple-upload, that subs
 
 https://docs.ckeditor.com/ckeditor5/latest/builds/guides/development/custom-builds.html
 
-`npm install ckeditor5-s3-upload`
+`npm install ckeditor5-sss-upload`
 
 Add this plugin and remove the ckfinder and easyimage plugins
 
@@ -23,7 +23,7 @@ module.exports = {
     //'@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter',
     //'@ckeditor/ckeditor5-easy-image/src/easyimage',
 
-    "ckeditor5-s3-upload/src/s3upload"
+    "ckeditor5-sss-upload/src/s3upload"
 
     // ...
   ],
