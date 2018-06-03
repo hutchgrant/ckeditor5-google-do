@@ -1,20 +1,21 @@
 {
-  "name": "ckeditor5-simple-upload",
-  "version": "1.0.3",
-  "description": "Standart image upload plugin for ckeditor5",
+  "name": "ckeditor5-s3-upload",
+  "version": "1.0.0",
+  "description": "Standard s3 image upload plugin for ckeditor5",
   "keywords": [
     "ckeditor5",
-    "image"
+    "image",
+    "s3"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pourquoi/ckeditor5-simple-upload.git"
+    "url": "https://github.com/mjadobson/ckeditor5-s3-upload.git"
   },
   "files": [
     "src",
     "theme"
   ],
-  "author": "pourquoi",
+  "author": "mjadobson",
   "license": "MIT",
   "dependencies": {
     "@ckeditor/ckeditor5-core": "^10.0.0",

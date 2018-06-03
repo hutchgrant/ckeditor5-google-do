@@ -6,60 +6,98 @@ export default class Adapter {
     }
 
     upload() {
-        return new Promise((resolve, reject) => {
-            this._initRequest();
-            this._initListeners(resolve, reject);
-            this._sendRequest();
-        });
+        return this.getCredentials().then(this.uploadImage);
     }
 
     abort() {
-        if (this.xhr) {
-            this.xhr.abort();
-        }
+        if (this.xhr) this.xhr.abort();
     }
 
-    _initRequest() {
-        const xhr = this.xhr = new XMLHttpRequest();
+    getCredentials() {
+        return new Promise((resolve, reject) => {
+            
+            var filename = this.loader.file.name;
 
-        xhr.withCredentials = true;
-        xhr.open('POST', this.url, true);
-        xhr.responseType = 'json';
+            if (!filename) return reject('No filename found');
+
+            var xhr = new XMLHttpRequest();
+            
+            xhr.withCredentials = true;
+            xhr.open('GET', this.url + '?filename=' + filename, true);
+            xhr.responseType = 'json';
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            
+            xhr.addEventListener('error', reject);
+            xhr.addEventListener('abort', reject);
+            xhr.addEventListener('load', function () {
+                var res = xhr.response;
+                
+                if (!res) return reject('No response from s3 creds url');
+
+                resolve(res);
+            });
+
+            xhr.send();
+
+        });
     }
 
-    _initListeners(resolve, reject) {
-        const xhr = this.xhr;
-        const loader = this.loader;
-        const t = this.t;
-        const genericError = t('Cannot upload file:') + ` ${loader.file.name}.`;
+    uploadImage(s3creds) {
+        return new Promise((resolve, reject) => {
+            
+            var data = new FormData();
 
-        xhr.addEventListener('error', () => reject(genericError));
-        xhr.addEventListener('abort', () => reject());
-        xhr.addEventListener('load', () => {
-            const response = xhr.response;
+            for (var param in s3creds.params) {
+                if (!s3creds.params.hasOwnProperty(param)) continue;
 
-            if (!response || !response.uploaded) {
-                return reject(response && response.error && response.error.message ? response.error.message : genericError);
+                data.append(param, s3creds.params[param]);
             }
 
-            resolve({
-                default: response.url
-            });
-        });
+            data.append('file', this.loader.file);
+            
+            var xhr = this.xhr = new XMLHttpRequest();
+            
+            xhr.withCredentials = false;
+            xhr.open('POST', s3creds.endpoint_url, true);
+            xhr.responseType = 'document';
+            
+            xhr.send(data);
+            
+            xhr.addEventListener('error', reject);
+            xhr.addEventListener('abort', reject);
+            xhr.addEventListener('load', () => {
+                const res = xhr.response;
 
-        if (xhr.upload) {
-            xhr.upload.addEventListener('progress', evt => {
-                if (evt.lengthComputable) {
-                    loader.uploadTotal = evt.total;
-                    loader.uploaded = evt.loaded;
+                if (!res) return reject('No Response')
+    
+                if (res.querySelector('Error')) {
+                    return reject({
+                        code: res.querySelector('Code'),
+                        message: res.querySelector('Message')
+                    });
                 }
-            });
-        }
-    }
 
-    _sendRequest() {
-        const data = new FormData();
-        data.append('upload', this.loader.file);
-        this.xhr.send(data);
+                var url = res.querySelector('Location');
+
+                if (!url) {
+                    return reject({
+                        code: 'NoLocation',
+                        message: 'No location in s3 POST response'
+                    });
+                }
+    
+                resolve({ default: url });
+            });
+
+            if (xhr.upload) {
+                xhr.upload.addEventListener('progress', e => {
+                    if (!e.lengthComputable) return;
+                    
+                    this.loader.uploadTotal = e.total;
+                    this.loader.uploaded = e.loaded;
+                });
+            }
+
+        });
     }
 }

@@ -3,21 +3,21 @@ import FileRepository from '@ckeditor/ckeditor5-upload/src/filerepository';
 
 import Adapter from './adapter';
 
-export default class SimpleUpload extends Plugin {
+export default class S3Upload extends Plugin {
 
     static get requires() {
         return [FileRepository];
     }
 
     static get pluginName() {
-        return 'SimpleUpload';
+        return 'S3Upload';
     }
 
     init() {
-        const url = this.editor.config.get('simpleUpload.uploadUrl');
+        const url = this.editor.config.get('s3Upload.policyUrl');
 
         if (!url) {
-            console.warn('simpleUpload.uploadUrl is not configured')
+            console.warn('s3Upload.policyUrl is not configured')
             return;
         }
 
