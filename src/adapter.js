@@ -14,7 +14,7 @@ export default class Adapter {
 
     getCredentials() {
         return new Promise((resolve, reject) => {
-            
+
             var filename = this.loader.file.name;
 
             if (!filename) return reject('No filename found');
@@ -43,7 +43,7 @@ export default class Adapter {
 
     uploadImage(s3creds) {
         return new Promise((resolve, reject) => {
-            
+
             var data = new FormData();
 
             for (var param in s3creds.params) {
@@ -66,8 +66,8 @@ export default class Adapter {
             xhr.addEventListener('abort', err => reject('s3abort'));
             xhr.addEventListener('load', () => {
                 const res = xhr.response;
-
-                if (!res) return reject('No Response')
+                
+                if (!res) return reject('No Response');
     
                 if (res.querySelector('Error')) {
                     var foo = `${res.querySelector('Code').textContent}: ${res.querySelector('Message').textContent}`;
@@ -79,7 +79,7 @@ export default class Adapter {
                 if (!url) {
                     return reject('NoLocation: No location in s3 POST response');
                 }
-    
+
                 resolve({ default: url });
             });
 
