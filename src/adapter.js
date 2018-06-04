@@ -70,8 +70,7 @@ export default class Adapter {
                 if (!res) return reject('No Response');
     
                 if (res.querySelector('Error')) {
-                    var foo = `${res.querySelector('Code').textContent}: ${res.querySelector('Message').textContent}`;
-                    return reject('foo');
+                    return reject(res.querySelector('Code').textContent + ': ' + res.querySelector('Message').textContent);
                 }
 
                 var url = res.querySelector('Location').textContent;
