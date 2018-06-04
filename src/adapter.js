@@ -5,7 +5,7 @@ export default class Adapter {
     }
 
     upload() {
-        return this.getCredentials().then(this.uploadImage);
+        return this.getCredentials().then(this.uploadImage(s3creds).bind(this));
     }
 
     abort() {
