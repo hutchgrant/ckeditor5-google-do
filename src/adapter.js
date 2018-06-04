@@ -2,7 +2,6 @@ export default class Adapter {
     constructor(loader, url, t) {
         this.loader = loader;
         this.url = url;
-        this.t = t;
     }
 
     upload() {
@@ -27,8 +26,8 @@ export default class Adapter {
             xhr.responseType = 'json';
             xhr.setRequestHeader('Content-Type', 'application/json');
             
-            xhr.addEventListener('error', reject);
-            xhr.addEventListener('abort', reject);
+            xhr.addEventListener('error', err => reject('crederr'));
+            xhr.addEventListener('abort', err => reject('credabort'));
             xhr.addEventListener('load', function () {
                 var res = xhr.response;
                 
@@ -63,27 +62,22 @@ export default class Adapter {
             
             xhr.send(data);
             
-            xhr.addEventListener('error', reject);
-            xhr.addEventListener('abort', reject);
+            xhr.addEventListener('error', err => reject('s3err'));
+            xhr.addEventListener('abort', err => reject('s3abort'));
             xhr.addEventListener('load', () => {
                 const res = xhr.response;
 
                 if (!res) return reject('No Response')
     
                 if (res.querySelector('Error')) {
-                    return reject({
-                        code: res.querySelector('Code'),
-                        message: res.querySelector('Message')
-                    });
+                    var foo = `${res.querySelector('Code').textContent}: ${res.querySelector('Message').textContent}`;
+                    return reject('foo');
                 }
 
-                var url = res.querySelector('Location');
+                var url = res.querySelector('Location').textContent;
 
                 if (!url) {
-                    return reject({
-                        code: 'NoLocation',
-                        message: 'No location in s3 POST response'
-                    });
+                    return reject('NoLocation: No location in s3 POST response');
                 }
     
                 resolve({ default: url });
