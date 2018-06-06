@@ -52,6 +52,8 @@ export default class Adapter {
                 data.append(param, s3creds.params[param]);
             }
 
+            data.append('Content-Type', this.loader.file.type)
+
             data.append('file', this.loader.file);
             
             var xhr = this.xhr = new XMLHttpRequest();
