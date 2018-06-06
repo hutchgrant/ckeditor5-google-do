@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-sss-upload",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Standard s3 image upload plugin for ckeditor5",
   "keywords": [
     "ckeditor5",
