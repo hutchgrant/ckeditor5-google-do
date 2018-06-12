@@ -59,10 +59,7 @@ export default class Adapter {
             var xhr = this.xhr = new XMLHttpRequest();
             
             xhr.withCredentials = false;
-            xhr.open('POST', s3creds.endpoint_url, true);
             xhr.responseType = 'document';
-            
-            xhr.send(data);
             
             xhr.addEventListener('error', err => reject('s3err'));
             xhr.addEventListener('abort', err => reject('s3abort'));
@@ -92,6 +89,9 @@ export default class Adapter {
                     this.loader.uploaded = e.loaded;
                 });
             }
+
+            xhr.open('POST', s3creds.endpoint_url, true);
+            xhr.send(data);
 
         });
     }
