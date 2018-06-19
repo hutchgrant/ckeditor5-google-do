@@ -1,7 +1,8 @@
 export default class Adapter {
-    constructor(loader, url, t) {
+    constructor(loader, url, mapUrl) {
         this.loader = loader;
         this.url = url;
+        this.mapUrl = mapUrl || (({ location }) => location);
     }
 
     upload() {
@@ -72,13 +73,18 @@ export default class Adapter {
                     return reject(res.querySelector('Code').textContent + ': ' + res.querySelector('Message').textContent);
                 }
 
-                var url = res.querySelector('Location').textContent;
+                const info = {
+                    location: res.querySelector('Location').textContent,
+                    bucket: res.querySelector('Bucket').textContent,
+                    key: res.querySelector('Key').textContent,
+                    etag: res.querySelector('ETag').textContent
+                };
 
-                if (!url) {
+                if (!info.location) {
                     return reject('NoLocation: No location in s3 POST response');
                 }
 
-                resolve({ default: url });
+                resolve({ default: this.mapUrl(info) });
             });
 
             if (xhr.upload) {

@@ -55,7 +55,10 @@ module.exports = {
 ```javascript
 ClassicEditor.create(document.querySelector("#editor"), {
   s3Upload: {
-    policyUrl: "http://127.0.0.1/my-upload-endpoint"
+    policyUrl: "http://127.0.0.1/my-upload-endpoint",
+    mapUrl: ({ location, bucket, key }) => {
+      return location;
+    }
   }
 });
 ```
