@@ -1,26 +1,26 @@
 {
-  "name": "ckeditor5-sss-upload",
-  "version": "1.1.0",
-  "description": "Standard s3 image upload plugin for ckeditor5",
+  "name": "ckeditor5-google-do",
+  "version": "1.0.0",
+  "description": "Google Cloud and DigitalOcean Spaces upload plugin for ckeditor5",
   "keywords": [
     "ckeditor5",
-    "image",
-    "s3"
+    "google-cloud-storage",
+    "digitalocean-spaces"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mjadobson/ckeditor5-s3-upload.git"
+    "url": "https://github.com/hutchgrant/ckeditor5-google-do.git"
   },
   "files": [
-    "src",
-    "theme"
+    "src"
   ],
-  "author": "mjadobson@gmail.com",
+  "author": "grant@hutchdev.ca",
   "license": "MIT",
   "dependencies": {
     "@ckeditor/ckeditor5-core": "^10.0.0",
     "@ckeditor/ckeditor5-engine": "^10.0.0",
-    "@ckeditor/ckeditor5-upload": "^10.0.0"
+    "@ckeditor/ckeditor5-upload": "^10.0.0",
+    "axios": "^0.18.0"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-editor-classic": "^10.0.0",
