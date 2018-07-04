@@ -1,23 +1,33 @@
 {
   "name": "ckeditor5-google-do-example",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js",
-    "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\" ",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "version": "1.0.1",
+  "private": true,
+  "description": "Google Cloud and DigitalOcean Spaces upload plugin for ckeditor5",
+  "keywords": [
+    "ckeditor5",
+    "google-cloud-storage",
+    "digitalocean-spaces"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hutchgrant/ckeditor5-google-do.git"
   },
-  "author": "",
-  "license": "ISC",
+  "files": [
+    "src",
+    "example/index.js",
+    "example/config",
+    "example/package.json"
+  ],
+  "author": "grant@hutchdev.ca",
+  "license": "MIT",
   "dependencies": {
-    "@google-cloud/storage": "^1.7.0",
-    "aws-sdk": "^2.268.1",
-    "concurrently": "^3.6.0",
-    "dotenv": "^6.0.0",
-    "express": "^4.16.3",
-    "nodemon": "^1.17.5"
+    "@ckeditor/ckeditor5-core": "^10.0.0",
+    "@ckeditor/ckeditor5-engine": "^10.0.0",
+    "@ckeditor/ckeditor5-upload": "^10.0.0",
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "@ckeditor/ckeditor5-editor-classic": "^10.0.0",
+    "@ckeditor/ckeditor5-utils": "^10.0.0"
   }
 }

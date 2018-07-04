@@ -2,22 +2,10 @@
 
 This is a fork of https://github.com/mjadobson/ckeditor5-sss-upload, that substitutes amazon s3 upload support for Google Cloud Storage and DigitalOcean Spaces.
 
-## Google Cloud Prerequisites
+### Backend Setup
 
-- [Create Project](https://console.cloud.google.com/project)
-- [Enable Billing](https://support.google.com/cloud/answer/6293499#enable-billing)
-- [Enable Cloud Storage API](https://console.cloud.google.com/flows/enableapi?apiid=storage-api.googleapis.com)
-- [Create Service Account](https://cloud.google.com/docs/authentication/getting-started)
-- [Configure your endpoint environment variables](https://github.com/hutchgrant/ckeditor5-google-do/blob/master/examples/config/dev.env)
-- [Add a upload signing route](https://github.com/hutchgrant/ckeditor5-google-do/blob/master/examples/index.js)
-- [Utilize @google-cloud/storage to presign uploads](https://github.com/googleapis/nodejs-storage)
-
-## DigitalOcean Space Prerequisite
-
-- [Create a DigitalOcean Space and API key](https://console.cloud.google.com/project)
-- [Configure your endpoint environment variables](https://github.com/hutchgrant/ckeditor5-google-do/blob/master/examples/config/dev.env)
-- [Add a upload signing route](https://github.com/hutchgrant/ckeditor5-google-do/blob/master/examples/index.js)
-- [Utilize aws-sdk to presign DO uploads](https://github.com/aws/aws-sdk-js)
+Guide with an examples for [setting up Google Cloud Storage](https://github.com/hutchgrant/ckeditor5-google-do/blob/master/docs/readme-google-cloud-storage.md).
+Guide with an examples for [setting up DigitalOcean Spaces](https://github.com/hutchgrant/ckeditor5-google-do/blob/master/docs/readme-digital-ocean-spaces.md).
 
 ### Build Integration
 

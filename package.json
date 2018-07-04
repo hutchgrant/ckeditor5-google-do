@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-google-do",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Google Cloud and DigitalOcean Spaces upload plugin for ckeditor5",
   "keywords": [
     "ckeditor5",
@@ -12,7 +12,9 @@
     "url": "https://github.com/hutchgrant/ckeditor5-google-do.git"
   },
   "files": [
-    "src"
+    "src",
+    "example",
+    "docs"
   ],
   "author": "grant@hutchdev.ca",
   "license": "MIT",
