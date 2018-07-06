@@ -1,0 +1,8 @@
+[
+    {
+      "origin": "*",
+      "responseHeader": ["Content-Type", "x-amz-acl"],
+      "method": ["GET", "PUT", "DELETE"],
+      "maxAgeSeconds": 3600
+    }
+]

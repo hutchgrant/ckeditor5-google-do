@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-google-do",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Google Cloud and DigitalOcean Spaces upload plugin for ckeditor5",
   "keywords": [
     "ckeditor5",

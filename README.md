@@ -2,11 +2,6 @@
 
 This is a fork of https://github.com/mjadobson/ckeditor5-sss-upload, that substitutes amazon s3 upload support for Google Cloud Storage and DigitalOcean Spaces.
 
-### Backend Setup
-
-Guide with an examples for [setting up Google Cloud Storage](https://github.com/hutchgrant/ckeditor5-google-do/blob/master/docs/readme-google-cloud-storage.md).
-Guide with an examples for [setting up DigitalOcean Spaces](https://github.com/hutchgrant/ckeditor5-google-do/blob/master/docs/readme-digital-ocean-spaces.md).
-
 ### Build Integration
 
 https://docs.ckeditor.com/ckeditor5/latest/builds/guides/development/custom-builds.html
@@ -76,3 +71,8 @@ The endpoint will receive a filename and filetype as query parameters, and will 
   "acl": " ... "
 }
 ```
+
+### Backend Setup
+
+Guide with an examples for [setting up Google Cloud Storage](https://github.com/hutchgrant/ckeditor5-google-do/blob/master/docs/readme-google-cloud-storage.md).
+Guide with an examples for [setting up DigitalOcean Spaces](https://github.com/hutchgrant/ckeditor5-google-do/blob/master/docs/readme-digital-ocean-spaces.md).
