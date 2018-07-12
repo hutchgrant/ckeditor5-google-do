@@ -3,9 +3,10 @@ const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
 
 export default class Adapter {
-  constructor(loader, url, mapUrl) {
+  constructor(loader, url, serveUrl) {
     this.loader = loader;
     this.url = url;
+    this.serveUrl = serveUrl;
   }
 
   upload() {
@@ -44,10 +45,26 @@ export default class Adapter {
           },
           cancelToken: source.token
         });
-        resolve({ default: s3creds.location });
+        if (!this.serveUrl) {
+          resolve({ default: s3creds.location });
+        } else {
+          this.getServingUrl(resolve, reject);
+        }
       } catch (err) {
         return reject(err);
       }
     });
+  }
+
+  async getServingUrl(resolve, reject) {
+    let filename = this.loader.file.name;
+    try {
+      let res = await axios.get(`${this.serveUrl}?filename=${filename}`, {
+        cancelToken: source.token
+      });
+      resolve({ default: res.data.serveUrl });
+    } catch (err) {
+      reject(err);
+    }
   }
 }

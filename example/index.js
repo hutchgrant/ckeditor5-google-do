@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const rp = require('request-promise');
 // Credentials
 const fs = require('fs');
 const dotenv = require('dotenv');
@@ -48,22 +49,86 @@ app.get('/api/upload-google', (req, res) => {
     contentType: req.query.filetype
   };
 
+  // These options will set the parameters for the request to AppEngine
+  let uri = `${keys.s3.endpoint}/${keys.s3.bucket}/${filename}`;
+  if (req.query.mode == 'serve') {
+    uri = `https://${keys.project_id}.appspot.com/?name=${filename}&size=${
+      keys.default_size
+    }&crop=${keys.default_crop}`;
+  }
+
   // Get a signed URL for the file
   storage
     .bucket(keys.s3.bucket)
     .file(filename)
     .getSignedUrl(options)
-    .then(results => {
+    .then(async results => {
       const url = results[0];
       res.send({
         endpoint_url: url,
-        location: `${keys.s3.endpoint}/${keys.s3.bucket}/${filename}`,
+        location: uri,
         acl: keys.s3.policy
       });
     })
     .catch(err => {
       console.error('ERROR:', err);
     });
+});
+
+/*
+* Google App Engine create ServingUrl
+*/
+app.get('/api/serve', async (req, res) => {
+  const filename = `${req.query.filename}`;
+
+  const uri = `https://${keys.project_id}.appspot.com/?name=${filename}&size=${
+    keys.default_size
+  }&crop=${keys.default_crop}`;
+
+  const dynImageOptions = {
+    method: 'GET',
+    uri: uri,
+    json: true
+  };
+
+  try {
+    const dynImageService = await rp(dynImageOptions);
+    res.send({
+      serveUrl: dynImageService.url,
+      blobkey: dynImageService.blobkey.blobKey
+    });
+  } catch (err) {
+    console.error('ERROR:', err);
+    res.status(500).json({ error: "Oh no! We've encountered an error!" });
+  }
+});
+
+/*
+* Google App Engine delete ServingUrl
+*/
+app.delete('/api/serve', async (req, res) => {
+  const blobkey = `${req.query.key}`;
+
+  const uri = `https://${keys.project_id}.appspot.com?key=${blobkey}`;
+
+  const dynImageOptions = {
+    method: 'DELETE',
+    uri: uri,
+    body: {
+      key: blobkey
+    },
+    json: true
+  };
+
+  try {
+    const dynImageService = await rp(dynImageOptions);
+    res.send({
+      success: true
+    });
+  } catch (err) {
+    console.error('ERROR:', err);
+    res.status(500).json({ error: "Oh no! We've encountered an error!" });
+  }
 });
 
 /*

@@ -14,6 +14,7 @@ export default class UploadGoogleDO extends Plugin {
 
   init() {
     const url = this.editor.config.get('uploadGoogleDO.policyUrl');
+    const serveUrl = this.editor.config.get('uploadGoogleDO.serveUrl');
 
     if (!url) {
       console.warn('uploadGoogleDO.policyUrl is not configured');
@@ -21,6 +22,6 @@ export default class UploadGoogleDO extends Plugin {
     }
 
     this.editor.plugins.get('FileRepository').createUploadAdapter = loader =>
-      new Adapter(loader, url);
+      new Adapter(loader, url, serveUrl);
   }
 }

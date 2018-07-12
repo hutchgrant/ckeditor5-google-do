@@ -18,6 +18,7 @@ import UploadGoogleDO from 'ckeditor5-google-do/src/upload';
 export default {
   uploadGoogleDO: {
     policyUrl: '/api/upload-google'
+    // serveUrl: '/api/serve'
   },
   plugins: [
     Bold,

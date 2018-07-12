@@ -27,6 +27,20 @@ cd ./example
 npm install && npm install --prefix client
 ```
 
+### Configure Environment
+
+edit the config/dev.env with your bucket credentials:
+
+```
+ACCESSKEY_ID=some-key-id
+SECRET_ACCESSKEY=some-secret-key-id
+S3_ENDPOINT=ams3.digitaloceanspaces.com
+S3_REGION=ams3
+S3_BUCKET=your-bucket-name
+S3_POLICY=public-read
+S3_SIGNATURE=v2
+```
+
 ### Run Example
 
 ```bash

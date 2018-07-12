@@ -9,5 +9,8 @@ module.exports = {
     signature: process.env.S3_SIGNATURE,
     expiry: process.env.S3_EXPIRY,
     keyfile: process.env.GOOGLE_APPLICATION_CREDENTIALS
-  }
+  },
+  default_size: process.env.DEFAULT_SIZE,
+  default_crop: process.env.DEFAULT_CROP,
+  project_id: process.env.PROJECTID
 };
